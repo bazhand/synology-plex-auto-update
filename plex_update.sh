@@ -71,7 +71,14 @@ if [ "$newversion" != "$curversion" ]
     mkdir -p /tmp/plex/ > /dev/null 2>&1
     echo Nouvelle version disponible, installation en cours :
     CPU=$(uname -m)
+
+if [ "$CPU" = "armv7l" ] # Plex denotes this CPU as armv7neon in releases. Tested on DS216Play.
+then
+    url=$(echo "${jq}" | jq -r '.nas."Synology (DSM 7)".releases[] | select(.build=="linux-armv7neon") | .url')
+else
     url=$(echo "${jq}" | jq -r '.nas."Synology (DSM 7)".releases[] | select(.build=="linux-'"${CPU}"'") | .url')
+fi
+
     /bin/wget $url -P /tmp/plex/
     /usr/syno/bin/synopkg install /tmp/plex/*.spk
     sleep 30
