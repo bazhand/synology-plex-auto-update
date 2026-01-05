@@ -11,8 +11,8 @@
 # Vérification ROOT
 if [ "$EUID" -ne "0" ];
   then
-    printf " %s\n" "Ce script DOIT être exécuté avec les persmissions root."
-    /usr/syno/bin/synonotify PKGHasUpgrade '{"%PKG_HAS_UPDATE%": "Le script de mise à jour automatique de Plex Media Server a échoué.\n\nCe script DOIT être exécuté avec les persmissions root."}'
+    printf " %s\n" "Ce script DOIT être exécuté avec les permissions root."
+    /usr/syno/bin/synonotify PKGHasUpgrade '{"%PKG_HAS_UPDATE%": "Le script de mise à jour automatique de Plex Media Server a échoué.\n\nCe script DOIT être exécuté avec les permissions root."}'
     printf "\n"
     exit 1
 fi
